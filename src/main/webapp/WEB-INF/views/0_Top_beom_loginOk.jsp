@@ -150,7 +150,7 @@ a.category:visited {
 				<div class="header">
 					<div class="container_head">
 						<div>
-							<a href="1_main.jsp"> <img class="logo" alt="" src="resources/logo.png" style="margin-top: 8px;">
+							<a href="mainLogin.do"> <img class="logo" alt="" src="resources/img/logo.png" style="margin-top: 8px;">
 							</a>
 						</div>
 

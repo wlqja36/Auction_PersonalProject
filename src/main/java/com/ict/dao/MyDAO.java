@@ -12,6 +12,7 @@ public interface MyDAO {
 	int insertProduct(VO vo) throws Exception;
 	MVO selectAuctionLogIn(MVO mvo) throws Exception;
 	MVO selectUserOne(String u_id) throws Exception;
+	VO selectOneList(int p_num) throws Exception;
 	/*
 	VO selectShopOneList(String idx) throws Exception;
 	

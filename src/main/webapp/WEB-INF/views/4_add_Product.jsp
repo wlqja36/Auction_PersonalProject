@@ -16,6 +16,7 @@
 		f.action="addProduct_ok.do";
 		f.submit();
 	}
+	document.getElementById('currentDatetime').value=new Date().toISOString().slice(0,-1);
 </script>
 <style type="text/css">
 :root { --border-gray-color: #dadada;
@@ -107,7 +108,10 @@ div.info {
 			<div class="login-stay-sign-in"></div>
 			<div class="info">
 				<span class="info">제품 상세 정보</span>
-				<textarea name="p_info" rows="25" cols="126" style="resize: none;" placeholder="제품의 상세한 정보를 입력하세요. &#13;&#10;ex)제품명&#13;&#10;   구매날짜&#10;   충전이 안될 때가 있습니다.&#10;   왼쪽 상단에 기스가 있습니다.&#10;   미개봉 새 제품입니다." ></textarea>
+				
+					<!-- <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script> -->
+					<textarea name="p_info" rows="25" cols="126" style="resize: none;" placeholder="제품의 상세한 정보를 입력하세요. &#13;&#10;ex)제품명&#13;&#10;   구매날짜&#10;   충전이 안될 때가 있습니다.&#10;   왼쪽 상단에 기스가 있습니다.&#10;   미개봉 새 제품입니다." ></textarea>
+					<!-- <script type="text/javascript">CKEDITOR.replace('p_info');</script> -->
 				
 			</div>
 			<div class="login-stay-sign-in"></div>
@@ -129,9 +133,11 @@ div.info {
 			<input class="info" type="number" placeholder="호가 입력" step="10" name="a_price">
 			<div class="login-stay-sign-in"></div>
 			<span class="info">경매종료</span>
-			<input class="info" type="datetime-local" name="e_day">
+			<input class="info" type="datetime-local" name="e_day" id='currentDatetime'>
+			
 			<div class="login-stay-sign-in"></div>
-			<input type="submit" value="제품등록" style="padding: 10px 40px 10px 40px; float: right; font-size: 24px; onclick="write_ok(this.form)"">
+			<input type="hidden" name="u_num" value="${mvo.u_num }">
+			<input type="button" value="제품등록" style="padding: 10px 40px 10px 40px; float: right; font-size: 24px;" onclick="write_ok(this.form)">
 		</form>
 	</div>
 	<div>

@@ -403,7 +403,7 @@ a:visited {
 				</ul>
 				<div
 					style="border: 0; width: 100%; height: 1px; padding: 0; clear: both; background-color: #eee; margin-bottom: 10px;"></div>
-				<a href="productInfo.do"><img class="title" src="resources/img/${k.p_img }" alt=""></a>
+				<a href="productInfo.do"><img class="title" src="resources/upload/${k.p_img }" alt=""></a>
 				<ul>
 					<li class="content-right"><fmt:formatNumber value ="${k.n_price}" pattern="#,###"/></li>
 					<li class="content-left">현재가</li>

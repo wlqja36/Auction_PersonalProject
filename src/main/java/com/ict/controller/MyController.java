@@ -43,8 +43,21 @@ public class MyController {
 		return null;
 	}
 	@RequestMapping(value = "addProduct_ok.do", method = RequestMethod.POST)
-	public ModelAndView addProductOKCommand(VO vo, HttpServletRequest request) {
+	public ModelAndView addProductOKCommand(VO vo, HttpServletRequest request, HttpSession session) {
 		try {
+			System.out.println("제목"+vo.getP_name());
+			System.out.println("시작가"+vo.getS_price());
+			System.out.println("호가"+vo.getA_price());
+			System.out.println("이미지이름F"+vo.getF_name());
+			System.out.println("이미지이름P"+vo.getP_img());
+			System.out.println("내용"+vo.getP_info());
+			System.out.println("거래방법"+vo.getTrade());
+			System.out.println("끝나는날짜"+vo.getE_day());
+			System.out.println("유저넘버"+vo.getU_num());
+			System.out.println("카테고리"+vo.getCategory());
+			
+			
+			
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
 			MultipartFile file = vo.getF_name();
 			if(file.isEmpty()) {
@@ -59,12 +72,14 @@ public class MyController {
 					File out = new File(path, vo.getP_img());
 					FileCopyUtils.copy(in, out);
 				}
-				return new ModelAndView("redirect:main.do");
+				return new ModelAndView("redirect:mainLogin.do");
 			}else {
 				return new ModelAndView("redirect:addProduct.do");
+				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e);
 		}
 		return null;
 	}
@@ -126,8 +141,20 @@ public class MyController {
 
 	// 제품 설명 화면
 	@RequestMapping("productInfo.do")
-	public ModelAndView productInfoCommand() {
-		return new ModelAndView("5_product_info");
+	public ModelAndView productInfoCommand(HttpSession session,HttpServletRequest request) {
+		try {
+			ModelAndView mv = new ModelAndView("5_product_info"); 
+			int p_num = Integer.parseInt(request.getParameter("p_num"));
+			VO vo = myService.selectOneList(p_num);
+			String u_id = (String)session.getAttribute("log_id");
+			MVO mvo = myService.selectUserOne(u_id);
+			mv.addObject("mvo", mvo);
+			mv.addObject("vo",vo);
+			return mv;
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return null;
 	}
 	@RequestMapping("myPage.do")
 	public ModelAndView myPageCommand() {
@@ -143,7 +170,6 @@ public class MyController {
 		try {
 			ModelAndView mv = new ModelAndView("1_main_login"); 
 			String category = request.getParameter("category");
-			// 첫번째 들어올때는 파라미터가 null 이다.
 			if(category == null) {
 				category = "m1";
 			}

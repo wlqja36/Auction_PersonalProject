@@ -34,6 +34,11 @@ public MVO selectAuctionLogIn(MVO mvo) throws Exception {
 public MVO selectUserOne(String u_id) throws Exception {
 	return sqlSessionTemplate.selectOne("auction.userOne",u_id);
 }
+// 제품
+@Override
+public VO selectOneList(int p_num) throws Exception {
+	return sqlSessionTemplate.selectOne("auction.oneList",p_num);
+}
 	/*
 	@Override
 	public VO selectShopOneList(String idx) throws Exception {

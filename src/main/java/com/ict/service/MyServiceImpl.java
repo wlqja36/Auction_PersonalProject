@@ -32,6 +32,10 @@ public class MyServiceImpl implements MyService{
 	public MVO selectUserOne(String u_id) throws Exception {
 		return myDAO.selectUserOne(u_id);
 	}
+	@Override
+	public VO selectOneList(int p_num) throws Exception {
+		return myDAO.selectOneList(p_num);
+	}
 	/*
 	@Override
 	public VO selectShopOneList(String idx) throws Exception {

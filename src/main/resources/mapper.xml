@@ -9,13 +9,16 @@
 		select * from A_P where category = #{category}
 	</select>
 	<insert id="insert" parameterType="com.ict.vo.VO">
-		insert into A_P values(<!-- a_p_seq.nextval  -->6,#{p_name},#{s_price},#{n_price},#{a_price},#{p_img},#{p_info},#{trade},sysdate,#{e_day},#{u_num},#{category} )
+		insert into A_P values(a_p_seq.nextval,#{p_name},#{s_price},#{s_price},#{a_price},#{p_img},#{p_info},#{trade},sysdate,replace(#{e_day},'T',' '),#{u_num},#{category} )
 	</insert>
 	<select id="login" parameterType="com.ict.vo.MVO" resultType="com.ict.vo.MVO">
 		select * from A_U where u_id = #{u_id} and u_pw = #{u_pw}
 	</select>
 	<select id="userOne" parameterType="String" resultType="com.ict.vo.MVO">
 		select * from A_U where u_id = #{u_id}
+	</select>
+	<select id="oneList" parameterType="int" resultType="com.ict.vo.VO">
+		select * from A_P where p_num = #{p_num}
 	</select>
 	<!-- 
 	<select id="onelist" parameterType="String" resultType="com.ict.vo.VO">

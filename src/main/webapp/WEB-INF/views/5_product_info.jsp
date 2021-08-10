@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -255,18 +257,53 @@ li.content-right {
 </head>
 <body>
 	<div>
-		<%@ include file="0_Top_beom.jsp"%>
+		<%@ include file="0_Top_beom_loginOk.jsp"%>
 	</div>
 	<div class="container" style="margin-top: 100px;"></div>
 	<div class="container" style="align-items: flex-start;">
 		<div>
 			<h2>
-				<a href="">메인</a> > <a href="">기타</a> > <a href="">세부카테고리</a>
+				<a href="mainLogin.do">메인</a> > <a href="mainLogin.do?category=${vo.category }" id="cate">상위카테고리
+				<script type="text/javascript">
+				
+				switch ("${vo.category}") {
+				case "m1":
+					document.getElementById("cate").innerHTML ="디지털/가전";
+					break;
+				case "m2":
+					document.getElementById("cate").innerHTML ="패션/잡화/뷰티";
+					break;
+				case "m3":
+					document.getElementById("cate").innerHTML ="생활";
+					break;
+				case "m4":
+					document.getElementById("cate").innerHTML ="기타";
+					break;
+				default:
+					document.getElementById("cate").innerHTML ="에러";
+					break;
+				}
+				/* if(${vo.category}=="m1"){
+					document.getElementById("cate").innerHTML ="디지털/가전";
+				}else if (${vo.category}=="m2") {
+					document.getElementById("cate").innerHTML ="패션/잡화/뷰티";
+				}else if (${vo.category}=="m3") {
+					document.getElementById("cate").innerHTML ="생활";
+				}else if (${vo.category}=="m4") {
+					document.getElementById("cate").innerHTML ="기타";
+				}else{
+					document.getElementById("cate").innerHTML ="에러";
+				} */
+
+				</script></a>
 			</h2>
 		</div>
-		<div style="flex-direction: row; display: flex;"><!-- 큰틀 -->
-			<div style="max-width: 580px; margin-right: 20px; max-height: 320px;" ><!-- 슬라이드 -->
-				<div class="section">
+		<div style= "display: flex; flex-flow: row;"><!-- 큰틀 -->
+			<div>
+			<img src="resources/upload/${vo.p_img }" style="margin-top: 10px;max-width: 400px; min-width:400px; min-height:320px; margin-right: 20px; max-height: 320px;" >
+			</div>
+			<!-- 슬라이드 -->
+				<%-- <div class="section">
 					<input type="radio" name="slide" id="slide01" checked
 						style="position: fixed; opacity: 0"> <input type="radio"
 						name="slide" id="slide02" style="position: fixed; opacity: 0">
@@ -277,27 +314,14 @@ li.content-right {
 						<ul class="slidelist">
 							<!-- 슬라이드 영역 -->
 							<li class="slideitem"><a>
-									<div class="textbox">
-										<h3>첫번째 슬라이드</h3>
-										<p>첫번째 슬라이드 입니다.</p>
-									</div> <img src="../img/slide.jpg">
+									
 							</a></li>
 							<li class="slideitem"><a>
-
-									<div class="textbox">
-										<h3>두번째 슬라이드</h3>
-										<p>두번째 슬라이드 입니다.</p>
-									</div> <img src="../img/slide.jpg">
-							</a></li>
-							<li class="slideitem"><a>
-
-									<div class="textbox">
-										<h3>세번째 슬라이드</h3>
-										<p>세번째 슬라이드 입니다.</p>
-									</div> <img src="../img/slide.jpg">
-							</a></li class="slideitem">
-
+									 <img src="resources/upload/${vo.p_img }">
+							</a></li> --%>
+							 
 							<!-- 좌,우 슬라이드 버튼 -->
+							<!--
 							<div class="slide-control">
 								<div>
 									<label for="slide03" class="left"></label> <label for="slide02"
@@ -312,54 +336,48 @@ li.content-right {
 										class="right"></label>
 								</div>
 							</div>
+							 -->
 
-						</ul>
+						<!-- </ul> -->
 						<!-- 페이징 -->
 						<!-- <ul class="slide-pagelist">
 							<li><label for="slide01"></label></li>
 							<li><label for="slide02"></label></li>
 							<li><label for="slide03"></label></li>
 						</ul> -->
-					</div>
-				</div>
-			</div>
+					
+				
+			
 			<div style="width: 580px; max-width: 580px; height: 320px; max-heigh:320px; margin-top:10px; border: 1px solid black;"  >
-				<form>
+				<form method="post">
 			<ul>
-				<li class="content-title">제품명</li>
-				<li class="content-right">000,000원</li>
-				<li class="content-left">희망가</li>
-				<li class="content-right">000,000원</li>
+				<li class="content-title">${vo.p_name}</li>
+				<li class="content-right"><fmt:formatNumber value ="${vo.s_price}" pattern="#,###"/>원</li>
 				<li class="content-left">시작가</li>
-				<li class="content-right">000,000원</li>
+				<li class="content-right"><fmt:formatNumber value ="${vo.n_price}" pattern="#,###"/>원</li>
 				<li class="content-left">현재가</li>
 				<li class="content-right">남은시간</li>
 				<li class="content-left">남은시간</li>
 				<br>
 				<li class="content-right">0건</li>
 				<li class="content-left">응찰</li>
-				<li class="content-right">1,000원</li>
+				<li class="content-right"><fmt:formatNumber value ="${vo.a_price}" pattern="#,###"/>원</li>
 				<li class="content-left">호가</li>
-				<li class="content-right"><input class="info" type="number" placeholder="호가 입력" step="1000"></li>
+				<li class="content-right"><input class="info" type="number" placeholder="호가 입력" step="${vo.a_price}"></li>
 				<li class="content-left">응찰가격</li>
-				
 				<input type="submit" value="응찰하기" style="padding: 1px 230px 1px 230px; font-size: 22px;  margin-left: 20px; margin-right: 20px; margin-top: 10px;">
 			</ul>
 			</form>
 			</div>
 		</div>
 		
+		
 		<div class="login-stay-sign-in"></div>
 		<div>
 			<h1>제품정보</h1>
 			<div style="margin-bottom: 100px;">
 				<span>
-					제품 정보가 들어옵니다<br>
-					제품 정보가 들어옵니다<br>
-					제품 정보가 들어옵니다<br>
-					제품 정보가 들어옵니다<br>
-					제품 정보가 들어옵니다<br>
-					제품 정보가 들어옵니다<br>					
+					<pre style="font-size: 15px">${vo.p_info}</pre>			
 				</span>
 			</div>
 		</div>
