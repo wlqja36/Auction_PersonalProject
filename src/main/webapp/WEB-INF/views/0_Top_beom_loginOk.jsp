@@ -150,14 +150,14 @@ a.category:visited {
 				<div class="header">
 					<div class="container_head">
 						<div>
-							<a href="mainLogin.do"> <img class="logo" alt="" src="resources/img/logo.png" style="margin-top: 8px;">
+							<a href="main.do"> <img class="logo" alt="" src="resources/img/logo.png" style="margin-top: 8px;">
 							</a>
 						</div>
 
 						<div class="row">
 							
 								<ul class="myMenu">
-									<li class="menu"><a class="category" href="mainLogin.do?category=m1"> 디지털/가전</a>
+									<li class="menu"><a class="category" href="main.do?category=m1"> 디지털/가전</a>
 										<!--  <ul class="sub">
 											<li><a class="category" href="">장르</a> <a
 												class="category" href="">공포</a> <a class="category" href="">공포</a></li>
@@ -168,7 +168,7 @@ a.category:visited {
 
 										</ul> -->
 									</li>
-									<li class="menu"><a class="category" href="mainLogin.do?category=m2">패션/잡화/뷰티</a>
+									<li class="menu"><a class="category" href="main.do?category=m2">패션/잡화/뷰티</a>
 										<!-- <ul class="sub">
 											<li><a class="category" href="">장르</a> <a
 												class="category" href="">장르</a> <a class="category" href="">장르</a></li>
@@ -179,7 +179,7 @@ a.category:visited {
 
 										</ul> -->
 									</li>
-									<li class="menu"><a class="category" href="mainLogin.do?category=m3">생활</a>
+									<li class="menu"><a class="category" href="main.do?category=m3">생활</a>
 										<!-- <ul class="sub">
 											<li><a class="category" href="">장르</a> <a
 												class="category" href="">장르</a> <a class="category" href="">장르</a></li>
@@ -190,7 +190,7 @@ a.category:visited {
 
 										</ul> -->
 									</li>
-									<li class="menu"><a class="category" href="mainLogin.do?category=m4">기타</a>
+									<li class="menu"><a class="category" href="main.do?category=m4">기타</a>
 										<!-- <ul class="sub">
 											<li><a class="category" href="">고객센터 항목 1 </a></li>
 											<li><a class="category" href="">고객센터 항목 2 </a></li>

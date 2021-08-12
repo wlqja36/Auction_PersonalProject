@@ -330,9 +330,17 @@ a:visited {
 </style>
 </head>
 <body>
+<c:if test="${mvo == null}">
 	<div>
 		<%@ include file="0_Top_beom.jsp"%>
 	</div>
+		</c:if>
+		<c:if test="${mvo != null}">
+	<div>
+		<%@ include file="0_Top_beom_loginOk.jsp"%>
+	</div>
+		</c:if>
+	
 	<div class="section">
 		<input type="radio" name="slide" id="slide01" checked> <input
 			type="radio" name="slide" id="slide02"> <input type="radio"
@@ -410,7 +418,12 @@ a:visited {
 				<button style="background-color: #1b5ac2; padding: 4px; color: white;">검색</button>
 			</div>
 			<div>
-				<a onclick="message()"><button style="background-color: #1b5ac2; padding: 4px; color: white; margin-right: 10px;">경매등록</button></a>
+			<c:if test="${mvo == null}">
+				<a onclick="message()"><button style="background-color: #1b5ac2; padding: 4px; color: white; margin-right: 10px;">경매등록</button></a>	
+		</c:if>
+		<c:if test="${mvo != null}">
+				<a href="addProduct.do"><button style="background-color: #1b5ac2; padding: 4px; color: white; margin-right: 10px;">경매등록</button></a>	
+		</c:if>
 			</div>
 		
 	</div>
@@ -425,11 +438,22 @@ a:visited {
 		
 			<div class="item_box">
 				<ul>
+				<c:if test="${mvo == null}">
 					<li class="content-title"><a style="cursor: pointer;" onclick="message2()" >${k.p_name }</a></li>
+				</c:if>
+				<c:if test="${mvo != null}">
+					<li class="content-title"><a style="cursor: pointer;" href="productInfo.do?p_num=${k.p_num }" >${k.p_name }</a></li>
+				</c:if>
+					
 				</ul>
 				<div
 					style="border: 0; width: 100%; height: 1px; padding: 0; clear: both; background-color: #eee; margin-bottom: 10px;"></div>
-				<a style="cursor: pointer;" onclick="message2()"><img class="title" src="resources/upload/${k.p_img }" alt=""></a>
+				<c:if test="${mvo == null}">
+					<a style="cursor: pointer;" onclick="message2()"><img class="title" src="resources/upload/${k.p_img }" alt=""></a>
+				</c:if>
+				<c:if test="${mvo != null}">
+					<a style="cursor: pointer;" href="productInfo.do?p_num=${k.p_num }"><img class="title" src="resources/upload/${k.p_img }" alt=""></a>
+				</c:if>
 				<ul>
 					<li class="content-right"><fmt:formatNumber value ="${k.n_price}" pattern="#,###"/></li>
 					<li class="content-left">현재가</li>
@@ -649,7 +673,12 @@ a:visited {
 				<button style="background-color: #1b5ac2; padding: 4px; color: white;">검색</button>
 			</div>
 			<div>
-				<a href="addProduct.do"><button style="background-color: #1b5ac2; padding: 4px; color: white; margin-right: 10px;">경매등록</button></a>
+				<c:if test="${mvo == null}">
+				<a onclick="message()"><button style="background-color: #1b5ac2; padding: 4px; color: white; margin-right: 10px;">경매등록</button></a>	
+		</c:if>
+		<c:if test="${mvo != null}">
+				<a href="addProduct.do"><button style="background-color: #1b5ac2; padding: 4px; color: white; margin-right: 10px;">경매등록</button></a>	
+		</c:if>
 			</div>
 		
 	</div>

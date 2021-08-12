@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ict.dao.MyDAO;
+import com.ict.vo.BVO;
 import com.ict.vo.MVO;
 import com.ict.vo.VO;
 
@@ -35,6 +36,26 @@ public class MyServiceImpl implements MyService{
 	@Override
 	public VO selectOneList(int p_num) throws Exception {
 		return myDAO.selectOneList(p_num);
+	}
+	@Override
+	public MVO selectUserOneNick(String u_nick) throws Exception {
+		return myDAO.selectUserOneNick(u_nick);
+	}
+	@Override
+	public int insertUser(MVO mvo) throws Exception {
+		return myDAO.insertUser(mvo);
+	}
+	@Override
+	public int insertBid(BVO bvo) throws Exception {
+		return myDAO.insertBid(bvo);
+	}
+	@Override
+	public int updateN_price(BVO bvo) throws Exception {
+		return myDAO.updateN_price(bvo);
+	}
+	@Override
+	public List<BVO> selectBid(int p_num) throws Exception {
+		return myDAO.selectBid(p_num);
 	}
 	/*
 	@Override

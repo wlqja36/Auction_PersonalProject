@@ -9,6 +9,55 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/8cc7f9d44b.js"
 	crossorigin="anonymous"></script>
+	
+	<!-- 자동 갱신 스크립트 include -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+function updateN_price() {
+	
+	$.ajax({
+		url : "addBid.do",
+		method : "post",
+		dataType : "text",
+		data : {"p_num":bidForm.p_num.value,"b_price":bidForm.b_price.value},
+		success : function(data){
+			alert("입찰 되었습니다.");
+			document.getElementById("n_price").innerHTML = data+"원";
+		},
+		error : function() {
+			alert("응찰 에러. 관리자에게 연락해주세요.");
+		}
+	});
+}
+
+var timerID;
+$(document).ready(function () {
+    $('#execute').on('click',function(e){
+        e.preventDefault();
+        updateData();
+    });
+    $('#stop').on('click',function(e){
+        e.preventDefault();
+        clearTimeout(timerID); // 타이머 중지
+        $('#showtime').html('');
+    });   
+});
+
+function updateData(){
+    $.ajax({
+      url: "selectBid.do",
+      type:"post",
+      cache : false,
+      data : {"p_num":bidForm.p_num.value},
+      success: function(data){ // getserver.php 파일에서 echo 결과값이 data 임
+       $('#showtime').html(data);
+      }
+    });
+    timerID = setTimeout("updateData()", 2000); // 2초 단위로 갱신 처리
+}
+</script>
+
+
 <style type="text/css">
 :root { --border-gray-color: #dadada;
 }
@@ -256,9 +305,16 @@ li.content-right {
 
 </head>
 <body>
+	<c:if test="${mvo == null}">
+	<div>
+		<%@ include file="0_Top_beom.jsp"%>
+	</div>
+		</c:if>
+		<c:if test="${mvo != null}">
 	<div>
 		<%@ include file="0_Top_beom_loginOk.jsp"%>
 	</div>
+		</c:if>
 	<div class="container" style="margin-top: 100px;"></div>
 	<div class="container" style="align-items: flex-start;">
 		<div>
@@ -349,12 +405,12 @@ li.content-right {
 				
 			
 			<div style="width: 580px; max-width: 580px; height: 320px; max-heigh:320px; margin-top:10px; border: 1px solid black;"  >
-				<form method="post">
+				<form method="post" name="bidForm">
 			<ul>
 				<li class="content-title">${vo.p_name}</li>
 				<li class="content-right"><fmt:formatNumber value ="${vo.s_price}" pattern="#,###"/>원</li>
 				<li class="content-left">시작가</li>
-				<li class="content-right"><fmt:formatNumber value ="${vo.n_price}" pattern="#,###"/>원</li>
+				<li class="content-right" id="n_price"><fmt:formatNumber value ="${vo.n_price}" pattern="#,###"/>원</li>
 				<li class="content-left">현재가</li>
 				<li class="content-right">남은시간</li>
 				<li class="content-left">남은시간</li>
@@ -363,9 +419,10 @@ li.content-right {
 				<li class="content-left">응찰</li>
 				<li class="content-right"><fmt:formatNumber value ="${vo.a_price}" pattern="#,###"/>원</li>
 				<li class="content-left">호가</li>
-				<li class="content-right"><input class="info" type="number" placeholder="호가 입력" step="${vo.a_price}"></li>
+				<li class="content-right"><input class="info"  required="required" id="b_price" name="b_price" type="number" min="${vo.n_price + vo.a_price}" placeholder="호가 입력" step="${vo.a_price}"></li>
 				<li class="content-left">응찰가격</li>
-				<input type="submit" value="응찰하기" style="padding: 1px 230px 1px 230px; font-size: 22px;  margin-left: 20px; margin-right: 20px; margin-top: 10px;">
+				<input type="hidden" id="p_num" name="p_num" value="${vo.p_num }">
+				<input type="button" value="응찰하기" onclick="updateN_price()" style="padding: 1px 230px 1px 230px; font-size: 22px;  margin-left: 20px; margin-right: 20px; margin-top: 10px;">
 			</ul>
 			</form>
 			</div>
@@ -384,12 +441,10 @@ li.content-right {
 		<div>
 			<h1>응찰내역</h1>
 			<div style="width: 1200px; height: 400px; max-heigh:400px; margin-top:10px; border: 1px solid black;"  >
-				<span>
-					응찰 내역이 들어옵니다<br>
-					응찰 내역이 들어옵니다<br>
-					응찰 내역이 들어옵니다<br>
-					응찰 내역이 들어옵니다<br>
-					응찰 내역이 들어옵니다<br>
+			<input type="button" id="execute" value="응찰내역 실시간보기">
+			<input type="button" id="stop" value="멈추기"><br>
+				<span id="showtime">
+					
 				</span>
 			</div>
 		</div>

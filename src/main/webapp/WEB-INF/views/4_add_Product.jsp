@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,9 +77,16 @@ div.info {
 
 </head>
 <body>
+	<c:if test="${mvo == null}">
+	<div>
+		<%@ include file="0_Top_beom.jsp"%>
+	</div>
+		</c:if>
+		<c:if test="${mvo != null}">
 	<div>
 		<%@ include file="0_Top_beom_loginOk.jsp"%>
 	</div>
+		</c:if>
 	<div class="container" style="margin-top: 100px;">
 		<div style="align-items: center;">
 			<h1>제품등록</h1>

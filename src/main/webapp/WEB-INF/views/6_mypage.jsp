@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -67,9 +68,16 @@ tr.info:nth-child(odd){
 
 </head>
 <body>
+	<c:if test="${mvo == null}">
+	<div>
+		<%@ include file="0_Top_beom.jsp"%>
+	</div>
+		</c:if>
+		<c:if test="${mvo != null}">
 	<div>
 		<%@ include file="0_Top_beom_loginOk.jsp"%>
 	</div>
+		</c:if>
 	<div class="container" style="margin-top: 100px;">
 	<div style="margin-top: 50px;"> <!-- 큰틀 -->
 			 <!-- 내정보 -->
@@ -111,7 +119,7 @@ tr.info:nth-child(odd){
 					<td><a class="info" href="">회원정보 변경</a></td>
 				</tr>
 				<tr>
-					<td><a class="info" href="">로그아웃</a></td>
+					<td><a class="info" href="logout.do">로그아웃</a></td>
 				</tr>
 			</table>
 		</div>

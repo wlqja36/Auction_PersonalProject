@@ -20,6 +20,22 @@
 	<select id="oneList" parameterType="int" resultType="com.ict.vo.VO">
 		select * from A_P where p_num = #{p_num}
 	</select>
+	<select id="userOneNick" parameterType="String" resultType="com.ict.vo.MVO">
+		select * from A_U where u_nick = #{u_nick}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.ict.vo.MVO">
+		insert into A_U values(a_u_seq.nextval,#{u_id},#{u_pw},#{u_name},#{u_nick},#{u_email},#{u_point},sysdate,#{u_admin})
+	</insert>
+	<insert id="insertBid" parameterType="com.ict.vo.BVO">
+		insert into A_B values(a_b_seq.nextval,#{p_num},#{u_num},#{b_price})
+	</insert>
+	<update id="updateN_price" parameterType="com.ict.vo.BVO">
+		update A_P set n_price=#{b_price} where p_num=#{p_num}
+	</update>
+	<select id="selectBid" parameterType="int" resultType="com.ict.vo.BVO">
+		select * from A_B where p_num = #{p_num}
+	</select>
 	<!-- 
 	<select id="onelist" parameterType="String" resultType="com.ict.vo.VO">
 		select * from shop_t where idx = #{idx}

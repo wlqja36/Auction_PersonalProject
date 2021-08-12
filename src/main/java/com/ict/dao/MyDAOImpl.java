@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ict.vo.BVO;
 import com.ict.vo.MVO;
 import com.ict.vo.VO;
 
@@ -38,6 +39,26 @@ public MVO selectUserOne(String u_id) throws Exception {
 @Override
 public VO selectOneList(int p_num) throws Exception {
 	return sqlSessionTemplate.selectOne("auction.oneList",p_num);
+}
+@Override
+public MVO selectUserOneNick(String u_nick) throws Exception {
+	return sqlSessionTemplate.selectOne("auction.userOneNick",u_nick);
+}
+@Override
+public int insertUser(MVO mvo) throws Exception {
+	return sqlSessionTemplate.insert("auction.insertUser",mvo);
+}
+@Override
+public int insertBid(BVO bvo) throws Exception {
+	return sqlSessionTemplate.insert("auction.insertBid",bvo);
+}
+@Override
+public int updateN_price(BVO bvo) throws Exception {
+	return sqlSessionTemplate.update("auction.updateN_price",bvo);
+}
+@Override
+public List<BVO> selectBid(int p_num) throws Exception {
+	return sqlSessionTemplate.selectOne("auction.selectBid",p_num);
 }
 	/*
 	@Override

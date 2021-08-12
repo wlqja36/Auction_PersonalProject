@@ -2,6 +2,7 @@ package com.ict.service;
 
 import java.util.List;
 
+import com.ict.vo.BVO;
 import com.ict.vo.MVO;
 import com.ict.vo.VO;
 
@@ -12,7 +13,12 @@ public interface MyService {
 	int insertProduct(VO vo) throws Exception;
 	MVO selectAuctionLogIn(MVO mvo) throws Exception;
 	MVO selectUserOne(String u_id) throws Exception;
+	MVO selectUserOneNick(String u_nick) throws Exception;
 	VO selectOneList(int p_num) throws Exception;
+	int insertUser(MVO mvo) throws Exception;
+	int insertBid(BVO bvo) throws Exception;
+	int updateN_price(BVO bvo) throws Exception;
+	List<BVO> selectBid(int p_num) throws Exception;
 	/*
 	VO selectShopOneList(String idx) throws Exception;
 	MVO selectShopLogIn(MVO mvo) throws Exception;
